@@ -33,14 +33,16 @@ can_do(move_to_table(X), S) :- member(clear(X), S),
 */
 can_do(move_from_table(X, Y), S) :- member(on_table(X), S),
     member(clear(X), S),
-    member(clear(Y), S).
+    member(clear(Y), S),
+    \+X=Y.
 
 /**
 * posso spostare X su Y? write("move"), nl, write(X), nl, write(Y), nl,
 */
-can_do(move(X,Y), S) :- member(clear(X), S),
+can_do(move_on(X,Y), S) :- member(clear(X), S),
     member(on(X,Z), S),
-    member(clear(Y), S).
+    member(clear(Y), S),
+    \+X=Y.
 
 /**
 * applica lo spostamento del blocco X sul tavolo allo stato S
@@ -58,7 +60,8 @@ movement(move_from_table(X, Y), S, [on(X, Y) | S2]) :- delete(S, on_table(X), S1
 /**
 * applica lo spostamento di X su Y
 */
-movement(move_on(X,Y), S, [on(X, Y), clear(Z) | S2]) :- delete(S, clear(Y), S1),
+movement(move_on(X,Y), S, [on(X, Y), clear(Z) | S2]) :- member(on(X,Z), S),
+    delete(S, clear(Y), S1),
     delete(S1, on(X,Z), S2).
 
 /**
@@ -80,7 +83,7 @@ visited(S, [_ | R]) :- visited(S, R).
 * eseuzione
 */
 find_solution(SO) :- initial(S),
-    write("Stato iniziale è:"),
+    write("Stato iniziale è:"),nl,
     nl,
     write(S),
     nl,
@@ -90,6 +93,7 @@ solve(S, _, []) :- goal(S),
     write("Stato finale è:"),
     nl,
     write(S),
+    nl,nl,
     !.
 
 solve(S, BCK, [O | R]) :- can_do(O, S),
