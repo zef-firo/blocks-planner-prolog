@@ -63,7 +63,8 @@ movement(move_from_table(X, Y), S, [on(X, Y) | S2]) :- delete(S, on_table(X), S1
 /**
 * applica lo spostamento di X su Y
 */
-movement(move_on(X,Y), S, [on(X, Y), clear(Z) | S2]) :- delete(S, clear(Y), S1),
+movement(move_on(X,Y), S, [on(X, Y), clear(Z) | S2]) :- member(on(X,Z), S),
+    delete(S, clear(Y), S1),
     delete(S1, on(X,Z), S2).
 
 /**
