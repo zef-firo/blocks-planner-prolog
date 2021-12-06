@@ -7,4 +7,5 @@ Run each script with the command `swipl [file-name].pl`.
 
 ## Contents
 - `depth-first.pl` find rearrangement planning using depth first algorithm.
+- `breadth-first.pl` find rearrangement planning using breadth first algorithm.
 
