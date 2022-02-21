@@ -29,7 +29,7 @@ can_do(move_to_table(X), S) :- member(clear(X), S),
     member(on(X, Y), S).
 
 /**
-* posso spostare dal tavolo X su Y? write("mft"), nl, write(X), nl, write(Y), nl,
+* posso spostare dal tavolo X su Y?
 */
 can_do(move_from_table(X, Y), S) :- member(on_table(X), S),
     member(clear(X), S),
@@ -37,7 +37,7 @@ can_do(move_from_table(X, Y), S) :- member(on_table(X), S),
     \+X=Y.
 
 /**
-* posso spostare X su Y? write("move"), nl, write(X), nl, write(Y), nl,
+* posso spostare X su Y?
 */
 can_do(move_on(X,Y), S) :- member(clear(X), S),
     member(on(X,Z), S),
