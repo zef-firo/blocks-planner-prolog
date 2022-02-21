@@ -109,11 +109,8 @@ solve([[S, P, OP]|_], REV_OP) :- goal(S),
     write(S),
     nl,
     reverse(OP, REV_OP),
-    nl.
-
-solve([[S, PATH, OP]|R], OP1) :- goal(S),
-    !,
-    solve(R, OP1).
+    nl,
+    !.
 
 solve([[S, P, OP]|R], SO) :- list_cando(S, OPL),
     list_moved(S, P, OP, OPL, NSL),
